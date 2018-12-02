@@ -1,0 +1,12 @@
+#OS generated files
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Local file for custom commands and local settings e.g. git config
+.extra
