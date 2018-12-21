@@ -57,14 +57,25 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew gem git-flow grunt gulp node npm osx ruby vagrant sublime zsh-syntax-highlighting zsh-autosuggestions z yarn)
+plugins=(git brew gem git-flow grunt gulp node npm osx ruby vagrant sublime z yarn)
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/bin:vendor/bin:/opt/local/bin:$HOME/.cargo/bin"
+export PATH="$HOME/.npm-global/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/bin:vendor/bin:/opt/local/bin:$HOME/.cargo/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
+source /usr/local/share/antigen/antigen.zsh
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+antigen bundle zsh-users/zsh-autosuggestions
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Tell Antigen that you're done.
+antigen apply
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -95,7 +106,7 @@ alias s="python -m SimpleHTTPServer 8000"
 alias stree='/Applications/SourceTree.app/Contents/Resources/stree'
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+  . "/usr/local/opt/nvm/nvm.sh"
 
 source "$HOME/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
 
