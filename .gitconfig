@@ -19,6 +19,3 @@
 
 [include]
   path = .gitalias
-[user]
-	name = Maximilian Karacsony
-	email = maximilian.karacsony@mail.de
