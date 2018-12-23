@@ -16,3 +16,19 @@ git clone --bare git@github.com:Mksony/dotfiles.git $HOME/.cfg
 ```sh
 bash install.sh
 ```
+
+# Recipes
+
+## Adding local settings
+If ~/.extra exists, it will be sourced along with the other files.
+This comes in handy for things like git user settings, e.g.:
+
+```sh
+# Git credentials
+GIT_AUTHOR_NAME="John Doe"
+GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
+git config --global user.name "$GIT_AUTHOR_NAME"
+GIT_AUTHOR_EMAIL="john@doe.com"
+GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
+git config --global user.email "$GIT_AUTHOR_EMAIL"
+```
