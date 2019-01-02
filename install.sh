@@ -13,4 +13,8 @@ fi;
 config checkout
 config config status.showUntrackedFiles no
 
+brew bundle
+
 chsh -s `which zsh`
+
+bash ~/.macos

@@ -7,6 +7,11 @@ uses the following tools:
 
 # Installation
 
+## Install Homebrew
+```sh
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
 ## Clone the repository
 ```sh
 git clone --bare git@github.com:Mksony/dotfiles.git $HOME/.cfg
