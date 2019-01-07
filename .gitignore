@@ -10,3 +10,5 @@ Thumbs.db
 
 # Local file for custom commands and local settings e.g. git config
 .extra
+.gitextra
+.gitconfig-*

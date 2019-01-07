@@ -19,3 +19,4 @@
 
 [include]
   path = .gitalias
+	path = .gitextra
