@@ -15,6 +15,8 @@ config config status.showUntrackedFiles no
 
 brew bundle
 
-chsh -s `which zsh`
+# to avoid problems setting zsh as default shell
+sudo echo "$(which zsh)" >> /etc/shells
+chsh -s $(which zsh)
 
 bash ~/.macos
