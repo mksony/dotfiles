@@ -108,8 +108,6 @@ alias stree='/Applications/SourceTree.app/Contents/Resources/stree'
 export NVM_DIR="$HOME/.nvm"
   . "/usr/local/opt/nvm/nvm.sh"
 
-source "$HOME/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
-
 SPACESHIP_PROMPT_ORDER=(
   time          # Time stampts section
   user          # Username section
