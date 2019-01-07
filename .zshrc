@@ -1,6 +1,5 @@
 ZSH_DISABLE_COMPFIX=true
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
 DEFAULT_USER=`whoami`
 prompt_context() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
@@ -64,7 +63,6 @@ plugins=(git brew gem git-flow grunt gulp node npm osx ruby vagrant sublime z ya
 export PATH="$HOME/.npm-global/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/bin:vendor/bin:/opt/local/bin:$HOME/.cargo/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-source $ZSH/oh-my-zsh.sh
 source /usr/local/share/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
