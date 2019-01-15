@@ -102,6 +102,9 @@ alias zshconfig="nano ~/.zshrc"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias s="python -m SimpleHTTPServer 8000"
 alias stree='/Applications/SourceTree.app/Contents/Resources/stree'
+alias g='/usr/bin/git'
+
+. /usr/local/etc/profile.d/z.sh
 
 export NVM_DIR="$HOME/.nvm"
   . "/usr/local/opt/nvm/nvm.sh"
