@@ -56,7 +56,7 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew git-flow node npm osx ruby sublime z yarn)
+plugins=(git brew git-flow node npm osx ruby sublime z yarn docker)
 
 # User configuration
 
@@ -70,7 +70,12 @@ antigen use oh-my-zsh
 
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen theme denysdovhan/spaceship-prompt
+export NVM_DIR="$HOME/.nvm"
+export NVM_AUTO_USE=true
+antigen bundle lukechilds/zsh-nvm
+# workaround for https://github.com/zsh-users/antigen/issues/675
+THEME=denysdovhan/spaceship-prompt
+antigen list | grep $THEME; if [ $? -ne 0 ]; then antigen theme $THEME; fi
 
 # Tell Antigen that you're done.
 antigen apply
@@ -105,9 +110,6 @@ alias stree='/Applications/SourceTree.app/Contents/Resources/stree'
 alias g='/usr/bin/git'
 
 . /usr/local/etc/profile.d/z.sh
-
-export NVM_DIR="$HOME/.nvm"
-  . "/usr/local/opt/nvm/nvm.sh"
 
 SPACESHIP_PROMPT_ORDER=(
   time          # Time stampts section
@@ -145,23 +147,4 @@ SPACESHIP_PROMPT_ORDER=(
 SPACESHIP_DOCKER_SHOW=false
 SPACESHIP_PACKAGE_SHOW=false
 
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+eval $(thefuck --alias)
