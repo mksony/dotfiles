@@ -56,11 +56,11 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew git-flow node npm osx ruby sublime z yarn docker)
+plugins=(git brew git-flow node npm osx ruby z yarn docker)
 
 # User configuration
 
-export PATH="$HOME/.npm-global/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/bin:vendor/bin:/opt/local/bin:$HOME/.cargo/bin"
+export PATH="$HOME/.npm-global/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/:/usr/local/bin:vendor/bin:/opt/local/bin:$HOME/.cargo/bin:/usr/local/opt/gettext/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source /usr/local/share/antigen/antigen.zsh
@@ -70,6 +70,7 @@ antigen use oh-my-zsh
 
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle buonomo/yarn-completion
 export NVM_DIR="$HOME/.nvm"
 export NVM_AUTO_USE=true
 antigen bundle lukechilds/zsh-nvm
@@ -146,5 +147,8 @@ SPACESHIP_PROMPT_ORDER=(
 
 SPACESHIP_DOCKER_SHOW=false
 SPACESHIP_PACKAGE_SHOW=false
+
+compctl -g '~/.itermocil/*(:t:r)' itermocil
+
 
 eval $(thefuck --alias)
