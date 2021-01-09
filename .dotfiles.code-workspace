@@ -1,12 +1,12 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {
-		"files.exclude": {
-			"[^.]*": true,
-		}
-	}
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "[^.]*": true
+    }
+  }
 }
