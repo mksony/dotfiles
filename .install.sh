@@ -13,7 +13,7 @@ fi;
 config checkout
 config config status.showUntrackedFiles no
 
-brew bundle
+brew bundle --file ".Brewfile"
 
 # to avoid problems setting zsh as default shell
 sudo echo "$(which zsh)" >> /etc/shells
