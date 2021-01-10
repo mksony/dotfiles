@@ -19,7 +19,7 @@ git clone --bare git@github.com:Mksony/dotfiles.git $HOME/.cfg
 
 ## Setup the config files
 ```sh
-bash install.sh
+bash .install.sh
 ```
 
 # Recipes
