@@ -37,3 +37,20 @@ GIT_AUTHOR_EMAIL="john@doe.com"
 GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 git config --global user.email "$GIT_AUTHOR_EMAIL"
 ```
+
+## Folder based git config
+
+Create a `.gitextra` file and put e.g.
+
+```
+[include]
+  path = .gitconfig-default
+[includeIf "gitdir:~/repos/projects/"]
+  path = .gitconfig-my-company
+[includeIf "gitdir:~/repos/private/"]
+  path = .gitconfig-private
+[includeIf "gitdir:~/repos/hackspace/"]
+  path = .gitconfig-private
+```
+
+Create the included files and add folder specific git config.
