@@ -1,0 +1,22 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+			"folder_exclude_patterns": ["*"],
+			"file_include_patterns": [
+				".gitalias",
+				".gitconfig*",
+				".gitextra",
+				".gitignore",
+				".dotfiles.sublime-project",
+				".install.sh",
+				".macos",
+				".zprofile",
+				".zshrc",
+				".Brewfile",
+				"README.md"
+			]
+		}
+	]
+}
