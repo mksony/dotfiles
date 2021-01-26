@@ -1,3 +1,4 @@
+source /usr/local/share/antigen/antigen.zsh
 ZSH_DISABLE_COMPFIX=true
 # Path to your oh-my-zsh installation.
 DEFAULT_USER=`whoami`
@@ -7,6 +8,8 @@ prompt_context() {
   fi
 }
 
+# enable git completion
+autoload -Uz compinit && compinit
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -56,30 +59,32 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew git-flow node npm osx ruby z yarn docker)
 
 # User configuration
 
 export PATH="$HOME/.npm-global/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/:/usr/local/bin:vendor/bin:/opt/local/bin:$HOME/.cargo/bin:/usr/local/opt/gettext/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
-
-source /usr/local/share/antigen/antigen.zsh
-
-# Load the oh-my-zsh's library.
-antigen use oh-my-zsh
+antigen bundle docker
 
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle buonomo/yarn-completion
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle lukechilds/zsh-nvm
+
 export NVM_DIR="$HOME/.nvm"
 export NVM_AUTO_USE=true
-antigen bundle lukechilds/zsh-nvm
 # workaround for https://github.com/zsh-users/antigen/issues/675
 THEME=denysdovhan/spaceship-prompt
 antigen list | grep $THEME; if [ $? -ne 0 ]; then antigen theme $THEME; fi
 
 # Tell Antigen that you're done.
 antigen apply
+
+# zsh-history-substring-search configuration
+bindkey '^[[A' history-substring-search-up # or '\eOA'
+bindkey '^[[B' history-substring-search-down # or '\eOB'
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -135,7 +140,6 @@ SPACESHIP_PROMPT_ORDER=(
   pyenv         # Pyenv section
   dotnet        # .NET section
   ember         # Ember.js section
-  kubecontext   # Kubectl context section
   exec_time     # Execution time
   line_sep      # Line break
   battery       # Battery level and status
