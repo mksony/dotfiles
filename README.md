@@ -17,6 +17,13 @@ uses the following tools:
 git clone --bare git@github.com:Mksony/dotfiles.git $HOME/.cfg
 ```
 
+## After cloning:
+```sh
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+config checkout
+```
+
 ## Setup the config files
 ```sh
 bash .install.sh

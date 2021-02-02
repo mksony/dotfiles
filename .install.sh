@@ -15,6 +15,8 @@ config config status.showUntrackedFiles no
 
 brew bundle --file ".Brewfile"
 
+curl -o- -L https://yarnpkg.com/install.sh | bash
+
 # to avoid problems setting zsh as default shell
 sudo echo "$(which zsh)" >> /etc/shells
 chsh -s $(which zsh)
