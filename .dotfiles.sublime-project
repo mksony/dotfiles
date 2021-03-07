@@ -15,8 +15,9 @@
 				".zprofile",
 				".zshrc",
 				".Brewfile",
-				"README.md"
-			]
+				"README.md",
+				".vimrc"
+			],
 		}
 	]
 }
