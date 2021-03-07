@@ -71,6 +71,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle lukechilds/zsh-nvm
+antigen bundle softmoth/zsh-vim-mode
 
 export NVM_DIR="$HOME/.nvm"
 export NVM_AUTO_USE=true
@@ -156,3 +157,6 @@ compctl -g '~/.itermocil/*(:t:r)' itermocil
 
 
 eval $(thefuck --alias)
+
+source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
