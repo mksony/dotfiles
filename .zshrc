@@ -10,13 +10,14 @@ prompt_context() {
 
 # enable git completion
 autoload -Uz compinit && compinit
-
+setopt inc_append_history
+setopt share_history
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="spaceship"
-
+KEYTIMEOUT=1
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -160,3 +161,5 @@ eval $(thefuck --alias)
 
 source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
 source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
