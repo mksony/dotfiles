@@ -9,6 +9,16 @@ inoremap jk <ESC>
 nnoremap <SPACE> <Nop>
 let mapleader = " "
 
+syntax on
+
+set noerrorbells
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set nowrap
+set smartcase
+set nobackup
 set number 
 set relativenumber
 set noswapfile 
@@ -18,6 +28,12 @@ set incsearch
 set termguicolors
 set timeoutlen=1000
 set ttimeoutlen=5
+set undodir=~/.vim/undodir
+set undofile
+" Use new regular expression engine
+set re=0
+
+highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
@@ -43,6 +59,7 @@ Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'editorconfig/editorconfig-vim' 
+Plug 'mustache/vim-mustache-handlebars'
 
 call plug#end()
 
@@ -71,11 +88,16 @@ autocmd vimenter * ++nested colorscheme gruvbox
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>\
-" Start NERDTree. If a file is specified, move the cursor to its window.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
-	
+nnoremap <C-f> :NERDTreeFind<CR>
+
+" Exit Vim if NERDTree is the only window left.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+    \ quit | endif
+
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
 set encoding=utf-8
