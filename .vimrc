@@ -1,5 +1,5 @@
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+  silent !curl -fLo ~/rvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
@@ -30,8 +30,38 @@ set timeoutlen=1000
 set ttimeoutlen=5
 set undodir=~/.vim/undodir
 set undofile
+
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
 " Use new regular expression engine
 set re=0
+
+" Set to auto read when a file is changed from the outside
+set autoread
+au FocusGained,BufEnter * checktime
+
+" Show matching brackets when text indicator is over them
+set showmatch 
+
+" Set 7 lines to the cursor - when moving vertically using j/k
+set so=7
+
+set wrap "Wrap lines
+
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" j/k will move virtual lines (lines that wrap)
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+" Fast saving
+nmap <leader>w :w!<cr>
 
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
@@ -60,6 +90,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'editorconfig/editorconfig-vim' 
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 call plug#end()
 
@@ -98,6 +130,9 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 
+let NERDTreeShowHidden=1
+let NERDTreeIgnore=[".DS_Store"]
+let g:airline_powerline_fonts = 1
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
 set encoding=utf-8
