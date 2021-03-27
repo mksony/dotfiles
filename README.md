@@ -9,12 +9,12 @@ uses the following tools:
 
 ## Install Homebrew
 ```sh
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
 ## Clone the repository
 ```sh
-git clone --bare git@github.com:Mksony/dotfiles.git $HOME/.cfg
+git clone --bare https://github.com/mksony/dotfiles.git $HOME/.cfg
 ```
 
 ## After cloning:
