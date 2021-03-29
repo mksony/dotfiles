@@ -1,4 +1,5 @@
 --hidden
+--no-ignore
 --smart-case
 --follow
 --glob 
