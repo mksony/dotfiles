@@ -167,7 +167,7 @@ source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files'
-  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+  export FZF_DEFAULT_OPTS="-m --height 25% --border --history=$HOME/.fzf_history"
 fi
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
