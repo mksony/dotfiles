@@ -5,4 +5,8 @@
 --glob 
 !.git/**/*
 --glob 
-!node_modules/*
+!**/node_modules/**/*
+--glob 
+!build/**/*
+--glob 
+!dist/**/*
