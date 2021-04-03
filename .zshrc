@@ -110,7 +110,8 @@ HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="nano ~/.zshrc"
+alias zshconfig="vim ~/.zshrc"
+alias zshreload="source ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias s="python -m SimpleHTTPServer 8000"
@@ -170,4 +171,5 @@ if type rg &> /dev/null; then
   export FZF_DEFAULT_OPTS="-m --height 25% --border --history=$HOME/.fzf_history"
 fi
 
+export BAT_THEME="gruvbox-dark"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
