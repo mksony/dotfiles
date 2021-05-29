@@ -78,6 +78,7 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/jsonc.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-surround'
@@ -87,7 +88,6 @@ Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
-Plug 'jiangmiao/auto-pairs'
 Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'HerringtonDarkholme/yats.vim' " TS syntax
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
@@ -112,6 +112,8 @@ let g:coc_global_extensions = [
   \ 'coc-prettier',
   \ 'coc-json',
   \ ]
+" tsconfig.json is actually jsonc, help TypeScript set the correct filetype
+autocmd BufRead,BufNewFile tsconfig*.json set filetype=jsonc
 " from readme
 " if hidden is not set, TextEdit might fail.
 
