@@ -1,0 +1,12 @@
+--hidden
+--no-ignore
+--smart-case
+--follow
+--glob 
+!.git/**/*
+--glob 
+!**/node_modules/**/*
+--glob 
+!**/build/**/*
+--glob 
+!**/dist/**/*

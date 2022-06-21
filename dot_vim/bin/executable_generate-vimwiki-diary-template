@@ -1,0 +1,28 @@
+#!/usr/bin/python
+import os
+import sys
+import datetime
+
+template = """# {date}
+
+## What did you complete yesterday?
+
+- [ ]  
+
+## What do you commit to today?
+
+- [ ]  
+
+## What are your impediments/obstacles?
+
+## What Code Smell/Missing Unit Test/... did you spot yesterday?
+
+## What improvement did you make to the code yesterday?
+
+## TODOs"""
+
+date = (datetime.date.today() if len(sys.argv) < 2
+        # Expecting filename in YYYY-MM-DD.foo format
+        else os.path.splitext(os.path.basename(sys.argv[1]))[0])
+
+print(template.format(date=date))
