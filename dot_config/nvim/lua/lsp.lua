@@ -60,15 +60,19 @@ cmp.setup {
             vim.fn['vsnip#anonymous'](args.body)
         end
     },
-    mapping = {
-        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), {'i', 'c'}),
-        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), {'i', 'c'}),
-        ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), {'i', 'c'}),
-        ['<C-y>'] = cmp.config.disable, -- If you want to remove the default `<C-y>` mapping, You can specify `cmp.config.disable` value.
-        ['<C-e>'] = cmp.mapping({i = cmp.mapping.abort(), c = cmp.mapping.close()}),
-        ['<CR>'] = cmp.mapping.confirm({select = true})
-    },
-    sources = {{name = "nvim_lsp"}, {name = "buffer"}, {name = 'vsnip'}},
+    mapping = cmp.mapping.preset.insert({
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<CR>'] = cmp.mapping.confirm({select = true}) -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+        {name = 'nvim_lsp'}, {name = 'vsnip'} -- For vsnip users.
+        -- { name = 'luasnip' }, -- For luasnip users.
+        -- { name = 'ultisnips' }, -- For ultisnips users.
+        -- { name = 'snippy' }, -- For snippy users.
+    }, {{name = 'buffer'}}),
     formatting = {
         format = function(entry, vim_item)
             vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind -- set a name for each source
@@ -78,12 +82,11 @@ cmp.setup {
         end
     }
 }
--- Use buffer source for `/`.
-cmp.setup.cmdline('/', {sources = {{name = 'buffer'}}})
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {mapping = cmp.mapping.preset.cmdline(), sources = {{name = 'buffer'}}})
 
--- Use cmdline & path source for ':'.
-cmp.setup.cmdline(':', {sources = cmp.config.sources({{name = 'path'}}, {{name = 'cmdline'}})})
-
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {mapping = cmp.mapping.preset.cmdline(), sources = cmp.config.sources({{name = 'path'}}, {{name = 'cmdline'}})})
 nvim_lsp.tsserver.setup {
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
     on_attach = function(client, bufnr)
@@ -328,3 +331,33 @@ end
 --     clean_command_line_interval = 0,
 --     debounce_delay = 150
 -- })
+--
+-- -- OR setup with some options
+-- OR setup with some options
+require("nvim-tree").setup({
+    sort_by = "case_sensitive",
+    view = {
+        adaptive_size = true,
+        mappings = {
+            list = {
+                {key = {"<CR>", "o", "<2-LeftMouse>"}, action = "edit"}, {key = "<C-e>", action = "edit_in_place"},
+                {key = "O", action = "edit_no_picker"}, {key = {"<C-]>", "<2-RightMouse>"}, action = "cd"}, {key = "<C-v>", action = "vsplit"},
+                {key = "<C-x>", action = "split"}, {key = "<C-t>", action = "tabnew"}, {key = "<", action = "prev_sibling"},
+                {key = ">", action = "next_sibling"}, {key = "P", action = "parent_node"}, {key = "<BS>", action = "close_node"},
+                {key = "<Tab>", action = "preview"}, {key = "K", action = "first_sibling"}, {key = "J", action = "last_sibling"},
+                {key = "I", action = "toggle_git_ignored"}, {key = "H", action = "toggle_dotfiles"}, {key = "U", action = "toggle_custom"},
+                {key = "R", action = "refresh"}, {key = "a", action = "create"}, {key = "d", action = "remove"}, {key = "D", action = "trash"},
+                {key = "r", action = "rename"}, {key = "<C-r>", action = "full_rename"}, {key = "x", action = "cut"}, {key = "c", action = "copy"},
+                {key = "p", action = "paste"}, {key = "y", action = "copy_name"}, {key = "Y", action = "copy_path"},
+                {key = "gy", action = "copy_absolute_path"}, {key = "[c", action = "prev_git_item"}, {key = "]c", action = "next_git_item"},
+                {key = "-", action = "dir_up"}, {key = "s", action = "system_open"}, {key = "f", action = "live_filter"},
+                {key = "F", action = "clear_live_filter"}, {key = "q", action = "close"}, {key = "W", action = "collapse_all"},
+                {key = "E", action = "expand_all"}, {key = "S", action = "search_node"}, {key = ".", action = "run_file_command"},
+                {key = "<C-k>", action = "toggle_file_info"}, {key = "g?", action = "toggle_help"}
+            }
+        }
+    },
+    renderer = {group_empty = true},
+    filters = {dotfiles = false},
+    git = {ignore = false}
+})

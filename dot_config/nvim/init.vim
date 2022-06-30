@@ -129,7 +129,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
-Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+" Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -146,6 +146,7 @@ Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'editorconfig/editorconfig-vim' 
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'folke/trouble.nvim'
 Plug 'airblade/vim-gitgutter'
 Plug 'wellle/targets.vim'
@@ -229,7 +230,9 @@ nnoremap <leader>lds <cmd>lua require('telescope.builtin').lsp_document_symbols(
 " clear quickfix list
 nnoremap <leader>l <cmd>call setqflist([])<cr>
 
-nnoremap <C-t> <cmd>CHADopen<cr>
+nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
 
 let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
