@@ -359,5 +359,6 @@ require("nvim-tree").setup({
     },
     renderer = {group_empty = true},
     filters = {dotfiles = false},
-    git = {ignore = false}
+    git = {ignore = false},
+    update_focused_file = {enable = true}
 })
