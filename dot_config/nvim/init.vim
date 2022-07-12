@@ -156,7 +156,8 @@ Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'RishabhRD/popfix'
 Plug 'RishabhRD/nvim-lsputils'
-Plug 'tami5/lspsaga.nvim', {'branch': 'nvim6.0'}
+Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
+" Plug 'tami5/lspsaga.nvim', {'branch': 'nvim6.0'}
 " Plug 'tami5/lspsaga.nvim'
 Plug 'folke/lsp-colors.nvim'
 Plug 'hoob3rt/lualine.nvim'
@@ -191,27 +192,69 @@ lua << EOF
 require 'lsp'
 require 'plugins/evil_lualine'
 require 'plugins/telescope'
+require 'plugins/lspsaga'
+
 -- vim.lsp.set_log_level("debug")
 EOF
 
-nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
-vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
+lua <<EOF
+if vim.fn.has('nvim-0.5.1') == 1 then
+    vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
+    vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
+    vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
+    vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
+    vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
+    vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
+    vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
+else
+    local bufnr = vim.api.nvim_buf_get_number(0)
 
-nnoremap <silent> gH <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
+    vim.lsp.handlers['textDocument/references'] = function(_, _, result)
+        require('lsputil.locations').references_handler(nil, result, { bufnr = bufnr }, nil)
+    end
 
-nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+    vim.lsp.handlers['textDocument/definition'] = function(_, method, result)
+        require('lsputil.locations').definition_handler(nil, result, { bufnr = bufnr, method = method }, nil)
+    end
 
-nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
-nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+    vim.lsp.handlers['textDocument/declaration'] = function(_, method, result)
+        require('lsputil.locations').declaration_handler(nil, result, { bufnr = bufnr, method = method }, nil)
+    end
 
-nnoremap <silent> gh <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
+    vim.lsp.handlers['textDocument/typeDefinition'] = function(_, method, result)
+        require('lsputil.locations').typeDefinition_handler(nil, result, { bufnr = bufnr, method = method }, nil)
+    end
 
-" nnoremap <silent><leader>rn <cmd>lua require('renamer').rename()<CR>
-nnoremap <silent><leader>rn <cmd>lua require('lspsaga.rename').rename()<CR>
+    vim.lsp.handlers['textDocument/implementation'] = function(_, method, result)
+        require('lsputil.locations').implementation_handler(nil, result, { bufnr = bufnr, method = method }, nil)
+    end
 
-nnoremap <silent><leader>ld <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
+    vim.lsp.handlers['textDocument/documentSymbol'] = function(_, _, result, _, bufn)
+        require('lsputil.symbols').document_handler(nil, result, { bufnr = bufn }, nil)
+    end
 
-nnoremap <silent><leader>cd <cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>
+    vim.lsp.handlers['textDocument/symbol'] = function(_, _, result, _, bufn)
+        require('lsputil.symbols').workspace_handler(nil, result, { bufnr = bufn }, nil)
+    end
+end
+EOF
+" nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
+" vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
+
+" nnoremap <silent> gH <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
+
+" nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+
+" nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
+" nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+
+" nnoremap <silent> gh <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
+
+" nnoremap <silent><leader>rn <cmd>lua require('lspsaga.rename').rename()<CR>
+
+" nnoremap <silent><leader>ld <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
+
+" nnoremap <silent><leader>cd <cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>
 
 " nnoremap <silent> [d <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
 " nnoremap <silent> ]d <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
