@@ -17,4 +17,17 @@ api.nvim_create_autocmd("TextYankPost", {
     group = yankGrp
 })
 
+vim.g.vimwiki_map_prefix = '<leader><leader>w'
+vim.g.vimwiki_global_ext = 0
+vim.g.vimwiki_list = {{path = '~/vimwiki/', syntax = 'markdown', ext = '.md'}}
+api.nvim_create_autocmd("BufNewFile", {
+    pattern = "*/vimwiki/diary/*.md",
+    command = ":silent 0r !~/.vim/bin/generate-vimwiki-diary-template '%'"
+})
+
+api.nvim_create_autocmd("Filetype", {
+    pattern = "vimwiki",
+    command = "silent! iunmap <buffer> <Tab>"
+})
+
 api.nvim_create_autocmd("VimLeavePre", {command = "NvimTreeClose"})

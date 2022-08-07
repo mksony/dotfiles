@@ -5,40 +5,25 @@ M.treesitter = {
         "vim", "html", "css", "javascript", "json", "toml", "markdown", "bash",
         "lua", "typescript", "tsx", "yaml", "dockerfile", "hcl"
     },
-    auto_install = true
+    auto_install = true,
+    highlight = {
+        enable = true
+        -- additional_vim_regex_highlighting = {'org'} -- Required for spellcheck, some LaTex highlights and code block highlights that do not have ts grammar
+    }
 }
 --
 M.nvimtree = {
-    -- git = {
-    --    enable = true,
-    -- },
-    --
-    -- renderer = {
-    --    highlight_git = true,
-    --    icons = {
-    --       show = {
-    --          git = true,
-    --       },
-    --    },
-    -- },
-    filters = {custom = {"^.DS_Store$"}}
+    git = {enable = true, ignore = false},
+    renderer = {highlight_git = true, icons = {show = {git = true}}},
+    filters = {custom = {"\\.DS_Store$"}}
 }
 --
--- M.blankline = {
---    filetype_exclude = {
---       "help",
---       "terminal",
---       "alpha",
---       "packer",
---       "lspinfo",
---       "TelescopePrompt",
---       "TelescopeResults",
---       "nvchad_cheatsheet",
---       "lsp-installer",
---       "norg",
---       "",
---    },
--- }
+M.blankline = {
+    filetype_exclude = {
+        "help", "terminal", "alpha", "packer", "lspinfo", "TelescopePrompt",
+        "TelescopeResults", "nvchad_cheatsheet", "lsp-installer", "norg", ""
+    }
+}
 
 M.cmp = function()
     local cmp = require('cmp')
@@ -65,7 +50,9 @@ M.telescope = {
     pickers = {
         find_files = {
             find_command = {
-                "fd", "--type", "f", "--strip-cwd-prefix", "--hidden"
+                "fd", "--type", "f", "--strip-cwd-prefix", "--hidden",
+                "--no-ignore", "--exclude", ".git", "--exclude", "*.DS_Store",
+                "--exclude", "node_modules", "--exclude", "dist"
             }
         }
     },
@@ -76,7 +63,9 @@ M.telescope = {
     extensions = {
         frecency = {
             default_workspace = 'CWD',
-            ignore_patterns = {"*.git/*", "*/tmp/*", "*/node_modules/*"}
+            ignore_patterns = {
+                "*.git/*", "*/tmp/*", "*/node_modules/*", "*/dist/*"
+            }
         },
         fzf = {
             fuzzy = true, -- false will only do exact matching

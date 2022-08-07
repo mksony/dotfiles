@@ -25,6 +25,7 @@ return {
     -- ["jose-elias-alvarez/typescript.nvim"] = {after = "nvim-lspconfig"},
     ["bkad/CamelCaseMotion"] = {},
     ["github/copilot.vim"] = {},
+    ['vimwiki/vimwiki'] = {},
     ["wellle/targets.vim"] = {},
     ["kylechui/nvim-surround"] = {
         config = function()
@@ -67,11 +68,9 @@ return {
 
     -- notes stuff
     -- ["nvim-neorg/neorg"] = {
-    --    ft = "norg",
-    --    after = "nvim-treesitter",
-    --    config = function()
-    --       require "custom.plugins.neorg"
-    --    end,
+    --     ft = "norg",
+    --     after = "nvim-treesitter",
+    --     config = function() require "custom.plugins.neorg" end
     -- },
 
     -- get highlight group under cursor
@@ -96,7 +95,17 @@ return {
             require("custom.plugins.smolconfigs").auto_session()
         end
     },
-    ["b0o/schemastore.nvim"] = {}
+    ["b0o/schemastore.nvim"] = {},
+    -- ['nvim-orgmode/orgmode'] = {
+    --     config = function()
+    --         local orgmode = require("orgmode")
+    --         orgmode.setup_ts_grammar()
+    --         orgmode.setup({
+    --             org_agenda_files = {'~/notes/work/**/*'},
+    --             org_default_notes_file = '~/notes/work/quick-notes.org'
+    --         })
+    --     end
+    -- },
     -- ["ThePrimeagen/refactoring.nvim"] = {
     --     requires = {
     --         {"nvim-lua/plenary.nvim"}, {"nvim-treesitter/nvim-treesitter"}
@@ -105,4 +114,5 @@ return {
     --         require("custom.plugins.smolconfigs").refactoring()
     --     end
     -- }
+    ["folke/which-key.nvim"] = {disable = false}
 }

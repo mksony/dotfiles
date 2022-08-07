@@ -32,11 +32,11 @@ M.dressing = function()
     end
 end
 
-M.refactoring = function()
-    local present, refactoring = pcall(require, "refactoring")
-
-    if present then refactoring.setup() end
-end
+-- M.refactoring = function()
+--     local present, refactoring = pcall(require, "refactoring")
+--
+--     if present then refactoring.setup() end
+-- end
 
 M.auto_session = function()
     local present, auto_session = pcall(require, "auto-session")

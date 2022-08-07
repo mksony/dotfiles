@@ -21,29 +21,12 @@ M.telescope = {
 
 M.lspconfig = {
     n = {
-        ["<leader>ca"] = {
-            function()
-                vim.lsp.buf.code_action()
-                -- local action = require("lspsaga.codeaction")
-                -- action.code_action()
-            end, "lsp code action"
-        },
-        ["gh"] = {
-            function()
-                local finder = require("lspsaga.finder").lsp_finder
-                finder()
-            end, "lsp saga finder"
-        }
+        ["<leader>ca"] = {"<cmd>Lspsaga code_action<CR>", "lsp code action"},
+        ["gh"] = {"<cmd>Lspsaga lsp_finder<CR>", "lsp saga finder"}
     },
     v = {
         ["<leader>ca"] = {
-            function()
-                vim.lsp.buf.range_code_action()
-                -- local action = require("lspsaga.codeaction")
-                -- vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-U>", true,
-                --                                                false, true))
-                -- action.range_code_action()
-            end, "lsp range code action"
+            ":<C-U>Lspsaga range_code_action<CR>", "lsp range code action"
         }
     }
 }

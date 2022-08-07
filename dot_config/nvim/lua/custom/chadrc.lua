@@ -4,7 +4,7 @@ local override = require "custom.override"
 
 M.plugins = {
     override = {
-        -- ["kyazdani42/nvim-tree.lua"] = override.nvimtree,
+        ["kyazdani42/nvim-tree.lua"] = override.nvimtree,
         ["nvim-treesitter/nvim-treesitter"] = override.treesitter,
         -- ["lukas-reineke/indent-blankline.nvim"] = override.blankline,
         ["hrsh7th/nvim-cmp"] = override.cmp,
