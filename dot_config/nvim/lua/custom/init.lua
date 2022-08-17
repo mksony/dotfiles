@@ -2,6 +2,11 @@
 -- load your globals, autocmds here or anything .__.
 -- require("core.utils").load_mappings()
 local api = vim.api
+local opt = vim.opt
+local util = require("core.utils")
+-- local auto_session = require("auto-session")
+
+opt.relativenumber = true
 vim.o.sessionoptions =
     "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
 vim.g.camelcasemotion_key = "<leader>"
@@ -31,3 +36,23 @@ api.nvim_create_autocmd("Filetype", {
 })
 
 api.nvim_create_autocmd("VimLeavePre", {command = "NvimTreeClose"})
+
+vim.api.nvim_create_autocmd("DirChangedPre", {
+    callback = function()
+        -- auto_session.AutoSaveSession()
+
+        -- Clear all buffers and jumps after session save so session doesn't blead over to next session.
+        util.closeAllBufs()
+        vim.cmd "clearjumps"
+
+    end,
+    pattern = "global"
+})
+
+vim.api.nvim_create_autocmd("DirChanged", {
+    callback = function()
+        -- Deferring to avoid otherwise there are tresitter highlighting issues
+        -- vim.defer_fn(function() auto_session.AutoRestoreSession() end, 50)
+    end,
+    pattern = "global"
+})

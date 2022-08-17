@@ -15,7 +15,8 @@ M.telescope = {
             function()
                 require('telescope').extensions.frecency.frecency()
             end, "finde recent files"
-        }
+        },
+        ["<leader>fp"] = {"<cmd>Telescope project<CR>", "find recent projects"}
     }
 }
 

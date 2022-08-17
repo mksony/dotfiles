@@ -2,20 +2,20 @@ local M = {}
 
 M.treesitter = {
     ensure_installed = {
-        "vim", "html", "css", "javascript", "json", "toml", "markdown", "bash",
-        "lua", "typescript", "tsx", "yaml", "dockerfile", "hcl"
+        "vim", "html", "css", "javascript", "json", "toml", "bash", "lua",
+        "markdown", "markdown_inline", "typescript", "tsx", "yaml",
+        "dockerfile", "hcl"
     },
-    auto_install = true,
-    highlight = {
-        enable = true
-        -- additional_vim_regex_highlighting = {'org'} -- Required for spellcheck, some LaTex highlights and code block highlights that do not have ts grammar
-    }
+    auto_install = true
 }
 --
 M.nvimtree = {
     git = {enable = true, ignore = false},
     renderer = {highlight_git = true, icons = {show = {git = true}}},
-    filters = {custom = {"\\.DS_Store$"}}
+    filters = {custom = {"\\.DS_Store$"}},
+    sync_root_with_cwd = true,
+    respect_buf_cwd = true,
+    update_focused_file = {enable = true}
 }
 --
 M.blankline = {
@@ -56,10 +56,7 @@ M.telescope = {
             }
         }
     },
-    extensions_list = {
-        "nvim-telescope/telescope-frecency.nvim",
-        "nvim-telescope/telescope-fzf-native.nvim"
-    },
+    extensions_list = {"frecency", "fzf", "project"},
     extensions = {
         frecency = {
             default_workspace = 'CWD',

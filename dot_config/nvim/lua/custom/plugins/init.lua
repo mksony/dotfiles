@@ -25,7 +25,7 @@ return {
     -- ["jose-elias-alvarez/typescript.nvim"] = {after = "nvim-lspconfig"},
     ["bkad/CamelCaseMotion"] = {},
     ["github/copilot.vim"] = {},
-    ['vimwiki/vimwiki'] = {},
+    ['vimwiki/vimwiki'] = {after = "nvim-treesitter"},
     ["wellle/targets.vim"] = {},
     ["kylechui/nvim-surround"] = {
         config = function()
@@ -90,11 +90,11 @@ return {
     --       require("custom.plugins.smolconfigs").autosave()
     --    end,
     -- },
-    ['rmagatti/auto-session'] = {
-        config = function()
-            require("custom.plugins.smolconfigs").auto_session()
-        end
-    },
+    -- ['rmagatti/auto-session'] = {
+    --     config = function()
+    --         require("custom.plugins.smolconfigs").auto_session()
+    --     end
+    -- },
     ["b0o/schemastore.nvim"] = {},
     -- ['nvim-orgmode/orgmode'] = {
     --     config = function()
@@ -114,5 +114,18 @@ return {
     --         require("custom.plugins.smolconfigs").refactoring()
     --     end
     -- }
-    ["folke/which-key.nvim"] = {disable = false}
+    ["folke/which-key.nvim"] = {disable = false},
+    ['nvim-telescope/telescope-project.nvim'] = {}
+    -- ["ahmedkhalf/project.nvim"] = {
+    --     config = function()
+    --         require("project_nvim").setup {
+    --             detection_methods = {"pattern"},
+    --             -- your configuration comes here
+    --             -- or leave it empty to use the default settings
+    --             -- refer to the configuration section below
+    --             patterns = {".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile"}
+    --         }
+    --     end,
+    --     requires = {"nvim-telescope/telescope.nvim"}
+    -- }
 }
