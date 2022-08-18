@@ -90,11 +90,11 @@ return {
     --       require("custom.plugins.smolconfigs").autosave()
     --    end,
     -- },
-    -- ['rmagatti/auto-session'] = {
-    --     config = function()
-    --         require("custom.plugins.smolconfigs").auto_session()
-    --     end
-    -- },
+    ['rmagatti/auto-session'] = {
+        config = function()
+            require("custom.plugins.smolconfigs").auto_session()
+        end
+    },
     ["b0o/schemastore.nvim"] = {},
     -- ['nvim-orgmode/orgmode'] = {
     --     config = function()
