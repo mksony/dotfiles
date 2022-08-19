@@ -115,7 +115,14 @@ return {
     --     end
     -- }
     ["folke/which-key.nvim"] = {disable = false},
-    ['nvim-telescope/telescope-project.nvim'] = {}
+    ['nvim-telescope/telescope-project.nvim'] = {},
+    ['j-hui/fidget.nvim'] = {
+        module = "fidget",
+        config = function()
+            require("custom.plugins.smolconfigs").fidget()
+        end
+
+    }
     -- ["ahmedkhalf/project.nvim"] = {
     --     config = function()
     --         require("project_nvim").setup {

@@ -55,4 +55,9 @@ M.auto_session = function()
     end
 end
 
+M.fidget = function()
+    local fidget = require("fidget")
+    fidget.setup()
+end
+
 return M
