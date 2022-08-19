@@ -26,7 +26,7 @@ return {
     ["bkad/CamelCaseMotion"] = {},
     ["github/copilot.vim"] = {},
     ['vimwiki/vimwiki'] = {after = "nvim-treesitter"},
-    ["wellle/targets.vim"] = {},
+    -- ["wellle/targets.vim"] = {},
     ["kylechui/nvim-surround"] = {
         config = function()
             require("custom.plugins.smolconfigs").surround()
@@ -122,6 +122,9 @@ return {
             require("custom.plugins.smolconfigs").fidget()
         end
 
+    },
+    ['echasnovski/mini.nvim'] = {
+        config = function() require("custom.plugins.smolconfigs").mini() end
     }
     -- ["ahmedkhalf/project.nvim"] = {
     --     config = function()

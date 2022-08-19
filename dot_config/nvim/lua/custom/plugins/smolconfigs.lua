@@ -60,4 +60,6 @@ M.fidget = function()
     fidget.setup()
 end
 
+M.mini = function() require('mini.ai').setup({}) end
+
 return M
