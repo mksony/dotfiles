@@ -125,6 +125,9 @@ return {
     },
     ['echasnovski/mini.nvim'] = {
         config = function() require("custom.plugins.smolconfigs").mini() end
+    },
+    ['glacambre/firenvim'] = {
+        run = function() vim.fn['firenvim#install'](0) end
     }
     -- ["ahmedkhalf/project.nvim"] = {
     --     config = function()

@@ -65,3 +65,76 @@ vim.api.nvim_create_autocmd("DirChanged", {
     end,
     pattern = "global"
 })
+
+vim.cmd 'let g:firenvim_config = { "globalSettings": { "alt": "all", }, "localSettings": { ".*": { "cmdline": "neovim", "content": "text", "priority": 0, "selector": "textarea", "takeover": "always", }, } }'
+
+-- Disable `firenvim` for the particular webiste
+vim.cmd 'let fc = g:firenvim_config["localSettings"]'
+vim.cmd 'let fc["https?://twitter.com/"] = { "takeover": "never", "priority": 1 }'
+vim.cmd 'let fc["https?://twitter.tv/"] = { "takeover": "never", "priority": 1 }'
+vim.cmd 'let fc["https?://mail.google.com/"] = { "takeover": "never", "priority": 1 }'
+
+-- Change `firenvim` file type to enable syntax highlight, `coc` works perfectly
+-- " after this settings!!!
+vim.cmd 'autocmd BufEnter github.com_*.txt set filetype=markdown'
+vim.cmd 'autocmd BufEnter txti.es_*.txt set filetype=typescript'
+
+-- Increase the font size to solve the `text too small` issue
+function IsFirenvimActive(event)
+    if vim.g.enable_vim_debug then
+        print("IsFirenvimActive, event: ", vim.inspect(event))
+    end
+
+    if vim.fn.exists('*nvim_get_chan_info') == 0 then return 0 end
+
+    local ui = vim.api.nvim_get_chan_info(event.chan)
+    if vim.g.enable_vim_debug then
+        print("IsFirenvimActive, ui: ", vim.inspect(ui))
+    end
+
+    --[[
+    If this function is running in browser, the `ui` looks like below:
+    {
+        client = {
+            attributes = {
+                [true] = 6 -- The channel number
+            },
+            methods = {
+                [true] = 6 -- The channel number
+            },
+            name = "Firenvim",
+            type = "ui",
+            version = {
+                -- ignore more info here
+            }
+        },
+        id = 5, -- 
+        mode = "rpc",
+        stream = "socket
+    }
+
+    Otherwise, it looks like this:
+    {
+        [true] = 6 -- The channel name
+    }
+    --]]
+    local is_firenvim_active_in_browser =
+        (ui['client'] ~= nil and ui['client']['name'] ~= nil)
+    if vim.g.enable_vim_debug then
+        print("is_firenvim_active_in_browser: ", is_firenvim_active_in_browser)
+    end
+    return is_firenvim_active_in_browser
+end
+
+function OnUIEnter(event)
+    if IsFirenvimActive(event) then
+        -- Disable the status bar
+        vim.cmd 'set laststatus=0'
+
+        -- Increase the font size
+        vim.cmd 'set guifont=FiraCode\\ Nerd\\ Font\\ Mono:h18'
+    end
+end
+
+vim.cmd(
+    [[autocmd UIEnter * :call luaeval('OnUIEnter(vim.fn.deepcopy(vim.v.event))')]])
