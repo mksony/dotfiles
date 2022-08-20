@@ -45,7 +45,9 @@ return {
         config = function()
             local saga = require("lspsaga")
 
-            saga.init_lsp_saga({code_action_lightbulb = {enable = false}})
+            saga.init_lsp_saga({
+                code_action_lightbulb = {enable = false, virtual_text = false}
+            })
         end
     },
     ["stevearc/dressing.nvim"] = {
@@ -128,6 +130,11 @@ return {
     },
     ['glacambre/firenvim'] = {
         run = function() vim.fn['firenvim#install'](0) end
+    },
+    ['Maan2003/lsp_lines.nvim'] = {
+        config = function()
+            require("custom.plugins.smolconfigs").lsp_lines()
+        end
     }
     -- ["ahmedkhalf/project.nvim"] = {
     --     config = function()

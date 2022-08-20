@@ -62,4 +62,10 @@ end
 
 M.mini = function() require('mini.ai').setup({}) end
 
+M.lsp_lines = function()
+    local present, lsp_lines = pcall(require, "lsp_lines")
+
+    if present then lsp_lines.setup() end
+end
+
 return M

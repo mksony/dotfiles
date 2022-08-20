@@ -32,6 +32,14 @@ M.lspconfig = {
     }
 }
 
+M.lsp_lines = {
+    n = {
+        ["<leader>ll"] = {
+            function() require("lsp_lines").toggle() end, "toggle lsp lines"
+        }
+    }
+}
+
 -- M.refactoring = {
 --     v = {
 --         ["<leader>rr"] = {

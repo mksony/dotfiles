@@ -1,5 +1,7 @@
 local on_attach = require("plugins.configs.lspconfig").on_attach
 local capabilities = require("plugins.configs.lspconfig").capabilities
+-- Disable virtual_text since it's redundant due to lsp_lines.
+vim.diagnostic.config({virtual_text = false})
 
 local typescript = require "typescript"
 typescript.setup({
