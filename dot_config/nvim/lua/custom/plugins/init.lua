@@ -38,7 +38,7 @@ return {
     },
     ['nvim-telescope/telescope-fzf-native.nvim'] = {run = 'make'},
     ["tami5/sqlite.lua"] = {},
-    ["hashivim/vim-terraform"] = {},
+    ["hashivim/vim-terraform"] = {ft = "terraform"},
     ['editorconfig/editorconfig-vim'] = {},
     ['glepnir/lspsaga.nvim'] = {
         branch = "main",
