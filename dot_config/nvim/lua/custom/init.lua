@@ -73,6 +73,8 @@ vim.cmd 'let fc = g:firenvim_config["localSettings"]'
 vim.cmd 'let fc["https?://twitter.com/"] = { "takeover": "never", "priority": 1 }'
 vim.cmd 'let fc["https?://twitter.tv/"] = { "takeover": "never", "priority": 1 }'
 vim.cmd 'let fc["https?://mail.google.com/"] = { "takeover": "never", "priority": 1 }'
+vim.cmd 'let fc["https?://jira.media-saturn.com/"] = { "takeover": "never", "priority": 1 }'
+vim.cmd 'let fc["https?://confluence.media-saturn.com/"] = { "takeover": "never", "priority": 1 }'
 
 -- Change `firenvim` file type to enable syntax highlight, `coc` works perfectly
 -- " after this settings!!!
@@ -130,9 +132,7 @@ function OnUIEnter(event)
     if IsFirenvimActive(event) then
         -- Disable the status bar
         vim.cmd 'set laststatus=0'
-
-        -- Increase the font size
-        vim.cmd 'set guifont=FiraCode\\ Nerd\\ Font\\ Mono:h18'
+        vim.cmd 'set guifont=FiraCode\\ Nerd\\ Font\\ Mono'
     end
 end
 
