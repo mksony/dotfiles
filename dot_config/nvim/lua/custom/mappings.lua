@@ -32,6 +32,16 @@ M.lspconfig = {
     }
 }
 
+M.trouble = {
+    n = {
+        ["<leader>xx"] = {"<cmd>TroubleToggle<CR>", "trouble"},
+        ["<leader>xw"] = {
+            "<cmd>TroubleToggle workspace_diagnostics<CR>",
+            "trouble workspace diagnostics"
+        }
+    }
+}
+
 M.lsp_lines = {
     n = {
         ["<leader>ll"] = {

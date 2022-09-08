@@ -68,4 +68,10 @@ M.lsp_lines = function()
     if present then lsp_lines.setup() end
 end
 
+M.trouble = function()
+    local present, trouble = pcall(require, "trouble")
+
+    if present then trouble.setup() end
+end
+
 return M

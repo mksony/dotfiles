@@ -13,9 +13,7 @@ typescript.setup({
         root_dir = vim.loop.cwd,
         init_options = {
             tsserver = {
-                preferences = {
-                    importModuleSpecifierPreference = 'project-relative'
-                }
+                preferences = {importModuleSpecifierPreference = 'relative'}
             }
         }
     }

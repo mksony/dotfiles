@@ -135,6 +135,13 @@ return {
         config = function()
             require("custom.plugins.smolconfigs").lsp_lines()
         end
+    },
+    ['folke/trouble.nvim'] = {
+        cmd = "TroubleToggle",
+        config = function()
+            require("custom.plugins.smolconfigs").trouble()
+        end,
+        requires = "kyazdani42/nvim-web-devicons"
     }
     -- ["ahmedkhalf/project.nvim"] = {
     --     config = function()
