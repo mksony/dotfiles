@@ -119,7 +119,7 @@ export PATH="$HOME/.npm-global/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:
 #
 # Example aliases
 alias zshconfig="nvim ~/.zshrc"
-alias zshreload="source ~/.zshrc"
+alias zshreload="exec zsh"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias s="python -m SimpleHTTPServer 8000"
@@ -190,10 +190,11 @@ alias k=kubectl
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
+eval "$(mcfly init zsh)"
+eval "$(fnm env --use-on-cd)"
 
 export PATH="/usr/local/opt/libpq/bin:$PATH"
 # source <(kubectl completion zsh)
-eval "$(fnm env --use-on-cd)"
 # autoload -Uz compinit
 # if [ $(date +'%j') != $(/usr/bin/stat -f '%Sm' -t '%j' ${ZDOTDIR:-$HOME}/.zcompdump) ]; then
 #   compinit
@@ -222,9 +223,9 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-patch-dl \
     zdharma-continuum/zinit-annex-rust
 
-zi snippet /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-zi snippet /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
-zi snippet OMZP::kubectl/kubectl.plugin.zsh
+zinit snippet /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+zinit snippet /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+zinit snippet OMZP::kubectl/kubectl.plugin.zsh
 
 ### End of Zinit's installer chunk
 zinit wait lucid for \
@@ -246,3 +247,4 @@ zinit wait lucid for \
 # antigen bundle lukechilds/zsh-nvm
 # antigen bundle softmoth/zsh-vim-mode
 # zprof
+### End of Zinit's installer chunk
