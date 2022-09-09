@@ -42,6 +42,8 @@ M.trouble = {
     }
 }
 
+M.git_blame = {n = {["<leader>bi"] = {"<cmd>GitBlameToggle<CR>", "git blame"}}}
+
 M.lsp_lines = {
     n = {
         ["<leader>ll"] = {

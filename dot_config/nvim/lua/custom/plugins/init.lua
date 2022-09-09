@@ -142,7 +142,8 @@ return {
             require("custom.plugins.smolconfigs").trouble()
         end,
         requires = "kyazdani42/nvim-web-devicons"
-    }
+    },
+    ['f-person/git-blame.nvim'] = {cmd = "GitBlameToggle"}
     -- ["ahmedkhalf/project.nvim"] = {
     --     config = function()
     --         require("project_nvim").setup {
