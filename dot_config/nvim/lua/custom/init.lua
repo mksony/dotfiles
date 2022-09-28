@@ -35,7 +35,18 @@ api.nvim_create_autocmd("Filetype", {
     command = "silent! iunmap <buffer> <Tab>"
 })
 
-api.nvim_create_autocmd("VimLeavePre", {command = "NvimTreeClose"})
+api.nvim_create_autocmd("Filetype", {
+    pattern = "vimwiki",
+    command = "silent! iunmap <buffer> <Tab>"
+})
+
+api.nvim_create_autocmd("VimLeavePre", {
+    callback = function()
+        -- Clear all buffers and jumps after session save so session doesn't blead over to next session.
+        if (vim.exists('g:started_by_firenvim')) then return end
+        vim.cmd "NvimTreeClose"
+    end
+})
 
 vim.api.nvim_create_autocmd("DirChangedPre", {
     callback = function()
@@ -49,6 +60,19 @@ vim.api.nvim_create_autocmd("DirChangedPre", {
     pattern = "global"
 })
 
+-- local cursorLineGrp = api.nvim_create_augroup("CursorLine", {clear = true})
+-- api.nvim_create_autocmd({"BufEnter", "VimEnter", "WinEnter", "BufWinEnter"}, {
+--     pattern = "*",
+--     command = "setlocal cursorline",
+--     group = cursorLineGrp
+-- })
+--
+-- api.nvim_create_autocmd("WinLeave", {
+--     pattern = "*",
+--     command = "setlocal nocursorline",
+--     group = cursorLineGrp
+-- })
+--
 vim.api.nvim_create_autocmd("DirChanged", {
     callback = function()
         -- Deferring to avoid otherwise there are tresitter highlighting issues

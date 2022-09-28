@@ -10,11 +10,9 @@ typescript.setup({
     server = { -- pass options to lspconfig's setup method
         on_attach = on_attach,
         capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities),
-        root_dir = vim.loop.cwd,
+        -- root_dir = vim.loop.cwd,
         init_options = {
-            tsserver = {
-                preferences = {importModuleSpecifierPreference = 'relative'}
-            }
+            preferences = {importModuleSpecifierPreference = 'project-relative'}
         }
     }
 })

@@ -1,5 +1,6 @@
 # zmodload zsh/zprof
 export EDITOR='nvim'
+export K9SCONFIG="$HOME/.config/k9s"
 # autoload -Uz compinit
 # if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
 #   compinit
@@ -124,7 +125,7 @@ alias zshreload="exec zsh"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias s="python -m SimpleHTTPServer 8000"
 alias stree='/Applications/SourceTree.app/Contents/Resources/stree'
-alias g='/usr/bin/git'
+alias g='git'
 
 # SPACESHIP_PROMPT_ORDER=(
 #   time          # Time stampts section
@@ -226,6 +227,7 @@ zinit light-mode for \
 zinit snippet /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
 zinit snippet /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 zinit snippet OMZP::kubectl/kubectl.plugin.zsh
+# zinit snippet /usr/local/etc/bash_completion.d/npm
 
 ### End of Zinit's installer chunk
 zinit wait lucid for \

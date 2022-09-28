@@ -32,7 +32,6 @@ return {
             require("custom.plugins.smolconfigs").surround()
         end
     },
-    ["nvim-telescope/telescope.nvim"] = {module = "telescope"},
     ["nvim-telescope/telescope-frecency.nvim"] = {
         requires = {"tami5/sqlite.lua", "nvim-telescope/telescope.nvim"}
     },
@@ -143,7 +142,111 @@ return {
         end,
         requires = "kyazdani42/nvim-web-devicons"
     },
-    ['f-person/git-blame.nvim'] = {cmd = "GitBlameToggle"}
+    ['f-person/git-blame.nvim'] = {cmd = "GitBlameToggle"},
+    ['RRethy/vim-illuminate'] = {
+        config = function()
+            require("custom.plugins.smolconfigs").illuminate()
+        end
+    },
+    ['yamatsum/nvim-cursorline'] = {
+        config = function()
+            require('nvim-cursorline').setup {
+                cursorline = {enable = true, timeout = 0, number = false},
+                cursorword = {
+                    enable = false,
+                    min_length = 3,
+                    hl = {underline = true}
+                }
+            }
+        end
+    },
+    ["kyazdani42/nvim-tree.lua"] = {
+        override_options = {
+            git = {enable = true, ignore = false},
+            renderer = {highlight_git = true, icons = {show = {git = true}}},
+            filters = {custom = {"\\.DS_Store$"}},
+            sync_root_with_cwd = true,
+            respect_buf_cwd = true,
+            update_focused_file = {enable = true}
+
+        }
+    },
+    ["nvim-treesitter/nvim-treesitter"] = {
+        override_options = {
+            ensure_installed = {
+                "vim", "html", "css", "javascript", "json", "toml", "bash",
+                "lua", "markdown", "markdown_inline", "typescript", "tsx",
+                "yaml", "dockerfile", "hcl"
+            },
+            auto_install = true
+        }
+    },
+    ["lukas-reineke/indent-blankline.nvim"] = {
+        override_options = {show_current_context_start = false}
+    },
+    ["hrsh7th/nvim-cmp"] = {
+        override_options = function()
+            local cmp = require('cmp')
+            return {
+                sources = {
+                    {name = "nvim_lsp"}, {name = "buffer"}, {name = "nvim_lua"},
+                    {name = "path"}
+                },
+                mapping = {
+                    ["<C-p>"] = cmp.mapping.select_prev_item(),
+                    ["<C-n>"] = cmp.mapping.select_next_item(),
+                    ["<C-e>"] = cmp.mapping.close(),
+                    ["<CR>"] = cmp.mapping.confirm({
+                        behavior = cmp.ConfirmBehavior.Replace,
+                        select = true
+                    }),
+                    ["<Tab>"] = cmp.config.disable,
+                    ["<S-Tab>"] = cmp.config.disable
+                }
+            }
+
+        end
+    },
+    -- ["wbthomason/packer.nvim"] = {snapshot = "stable_chad"},
+    ["nvim-telescope/telescope.nvim"] = {
+        module = "telescope",
+        override_options = {
+            pickers = {
+                find_files = {
+                    find_command = {
+                        "fd", "--type", "f", "--strip-cwd-prefix", "--hidden",
+                        "--no-ignore", "--exclude", ".git", "--exclude",
+                        "*.DS_Store", "--exclude", "node_modules", "--exclude",
+                        "dist"
+                    }
+                }
+            },
+            extensions_list = {"frecency", "fzf", "project"},
+            extensions = {
+                frecency = {
+                    default_workspace = 'CWD',
+                    ignore_patterns = {
+                        "*.git/*", "*/tmp/*", "*/node_modules/*", "*/dist/*"
+                    }
+                },
+                fzf = {
+                    fuzzy = true, -- false will only do exact matching
+                    override_generic_sorter = true, -- override the generic sorter
+                    override_file_sorter = true, -- override the file sorter
+                    case_mode = "smart_case" -- or "ignore_case" or "respect_case"
+                    -- the default case_mode is "smart_case"
+                }
+            }
+        }
+    },
+    ["williamboman/mason.nvim"] = {
+        override_options = {
+            ensure_installed = {
+                "lua-language-server", "stylua", "css-lsp", "html-lsp",
+                "typescript-language-server", "json-lsp", "shfmt", "shellcheck"
+            }
+        }
+    }
     -- ["ahmedkhalf/project.nvim"] = {
     --     config = function()
     --         require("project_nvim").setup {

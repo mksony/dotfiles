@@ -7,7 +7,7 @@ local b = null_ls.builtins
 local sources = {
 
     -- webdev stuff
-    b.formatting.prettier_d_slim.with({
+    b.formatting.prettierd.with({
         cwd = function(params)
             -- https://github.com/jose-elias-alvarez/null-ls.nvim/pull/833
             return
