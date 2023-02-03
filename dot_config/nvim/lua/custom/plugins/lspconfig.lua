@@ -9,7 +9,7 @@ typescript.setup({
     debug = false, -- enable debug logging for commands
     server = { -- pass options to lspconfig's setup method
         on_attach = on_attach,
-        capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities),
+        capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities),
         -- root_dir = vim.loop.cwd,
         init_options = {
             preferences = {importModuleSpecifierPreference = 'project-relative'}
@@ -21,7 +21,7 @@ local lspconfig = require "lspconfig"
 
 lspconfig.jsonls.setup {
     on_attach = on_attach,
-    capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities),
+    capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities),
     settings = {
         json = {
             schemas = require('schemastore').json.schemas(),
@@ -35,7 +35,7 @@ local servers = {"html", "cssls", "bashls", "terraformls", "dockerls"}
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         on_attach = on_attach,
-        capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities),
+        capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities),
         root_dir = vim.loop.cwd
     }
 end

@@ -27,7 +27,7 @@ M.lspconfig = {
     },
     v = {
         ["<leader>ca"] = {
-            ":<C-U>Lspsaga range_code_action<CR>", "lsp range code action"
+            "<cmd>Lspsaga code_action<CR><ESC>", "lsp code action"
         }
     }
 }

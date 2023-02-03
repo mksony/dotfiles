@@ -40,13 +40,13 @@ api.nvim_create_autocmd("Filetype", {
     command = "silent! iunmap <buffer> <Tab>"
 })
 
-api.nvim_create_autocmd("VimLeavePre", {
-    callback = function()
-        -- Clear all buffers and jumps after session save so session doesn't blead over to next session.
-        if (vim.exists('g:started_by_firenvim')) then return end
-        vim.cmd "NvimTreeClose"
-    end
-})
+-- api.nvim_create_autocmd("VimLeavePre", {
+--     callback = function()
+--         -- Clear all buffers and jumps after session save so session doesn't blead over to next session.
+--         if (vim.exists('g:started_by_firenvim')) then return end
+--         vim.cmd "NvimTreeClose"
+--     end
+-- })
 
 vim.api.nvim_create_autocmd("DirChangedPre", {
     callback = function()
@@ -99,6 +99,8 @@ vim.cmd 'let fc["https?://twitter.tv/"] = { "takeover": "never", "priority": 1 }
 vim.cmd 'let fc["https?://mail.google.com/"] = { "takeover": "never", "priority": 1 }'
 vim.cmd 'let fc["https?://jira.media-saturn.com/"] = { "takeover": "never", "priority": 1 }'
 vim.cmd 'let fc["https?://confluence.media-saturn.com/"] = { "takeover": "never", "priority": 1 }'
+vim.cmd 'let fc["https?://reetro.app/"] = { "takeover": "never", "priority": 1 }'
+vim.cmd 'let fc["https?://console.cloud.google.com/"] = { "takeover": "never", "priority": 1 }'
 
 -- Change `firenvim` file type to enable syntax highlight, `coc` works perfectly
 -- " after this settings!!!
@@ -160,5 +162,9 @@ function OnUIEnter(event)
     end
 end
 
-vim.cmd(
-    [[autocmd UIEnter * :call luaeval('OnUIEnter(vim.fn.deepcopy(vim.v.event))')]])
+local firenvim_font_group =
+    api.nvim_create_augroup("fnvim_font", {clear = true})
+api.nvim_create_autocmd("UIEnter", {
+    callback = function() OnUIEnter(vim.fn.deepcopy(vim.v.event)) end,
+    pattern = "*"
+})
