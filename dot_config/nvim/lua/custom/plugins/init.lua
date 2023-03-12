@@ -1,4 +1,13 @@
 return {
+  -- ["ghillb/cybu.nvim"] = {
+  --   after = {"nvim-tree/nvim-web-devicons"},
+  --   branch = "main", -- timely updates
+  --   -- branch = "v1.x", -- won't receive breaking changes
+  --   requires = { "nvim-tree/nvim-web-devicons"}, -- optional for icon support
+  --   config = function()
+  --     require('cybu').setup()
+  --   end,
+  -- },
   ["jose-elias-alvarez/typescript.nvim"] = {},
   ["neovim/nvim-lspconfig"] = {
     config = function()
@@ -167,7 +176,7 @@ return {
       }
     end,
   },
-  ["kyazdani42/nvim-tree.lua"] = {
+  ["nvim-tree/nvim-tree.lua"] = {
     override_options = {
       git = { enable = true, ignore = false },
       renderer = { highlight_git = true, icons = { show = { git = true } } },
@@ -285,6 +294,12 @@ return {
       },
     },
   },
+  ["lukas-reineke/lsp-format.nvim"] = {
+    -- module = "lsp-format",
+    -- config = function()
+    --   require("lsp-format.nvim").setup()
+    -- end
+  },
   -- ["ahmedkhalf/project.nvim"] = {
   --     config = function()
   --         require("project_nvim").setup {
@@ -297,4 +312,9 @@ return {
   --     end,
   --     requires = {"nvim-telescope/telescope.nvim"}
   -- }
+  ["stevearc/oil.nvim"] = {
+    config = function()
+      require("oil").setup()
+    end,
+  },
 }
