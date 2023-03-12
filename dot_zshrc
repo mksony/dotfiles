@@ -1,6 +1,7 @@
 # zmodload zsh/zprof
 export EDITOR='nvim'
 export K9SCONFIG="$HOME/.config/k9s"
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 # autoload -Uz compinit
 # if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
 #   compinit
@@ -249,4 +250,14 @@ zinit wait lucid for \
 # antigen bundle lukechilds/zsh-nvm
 # antigen bundle softmoth/zsh-vim-mode
 # zprof
+### End of Zinit's installer chunk
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+
 ### End of Zinit's installer chunk
