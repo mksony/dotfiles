@@ -1,14 +1,19 @@
+-- local autocmd = vim.api.nvim_create_autocmd
+
+-- Auto resize panes when resizing nvim window
+-- autocmd("VimResized", {
+--   pattern = "*",
+--   command = "tabdo wincmd =",
+-- })
 -- example file i.e lua/custom/init.lua
 -- load your globals, autocmds here or anything .__.
 -- require("core.utils").load_mappings()
 local api = vim.api
 local opt = vim.opt
-local util = require("core.utils")
-local auto_session = require("auto-session")
+local util = require "core.utils"
 
 opt.relativenumber = true
-vim.o.sessionoptions =
-    "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
 vim.g.camelcasemotion_key = "<leader>"
 -- -- Disable TAB completion for github copilot
 -- vim.g.copilot_no_tab_map = true
@@ -16,28 +21,29 @@ vim.g.camelcasemotion_key = "<leader>"
 vim.g.copilot_node_command = "~/.nvm/versions/node/v16.15.1/bin/node"
 
 -- Highlight on yank
-local yankGrp = api.nvim_create_augroup("YankHighlight", {clear = true})
+local yankGrp = api.nvim_create_augroup("YankHighlight", { clear = true })
 api.nvim_create_autocmd("TextYankPost", {
-    command = "silent! lua vim.highlight.on_yank()",
-    group = yankGrp
+  command = "silent! lua vim.highlight.on_yank()",
+  group = yankGrp,
 })
 
-vim.g.vimwiki_map_prefix = '<leader><leader>w'
+vim.g.vimwiki_map_prefix = "<leader><leader>w"
 vim.g.vimwiki_global_ext = 0
-vim.g.vimwiki_list = {{path = '~/vimwiki/', syntax = 'markdown', ext = '.md'}}
+vim.g.vimwiki_list = { { path = "~/vimwiki/", syntax = "markdown", ext = ".md" } }
+api.nvim_set_option("shell", "/usr/local/bin/zsh")
 api.nvim_create_autocmd("BufNewFile", {
-    pattern = "*/vimwiki/diary/*.md",
-    command = ":silent 0r !~/.vim/bin/generate-vimwiki-diary-template '%'"
+  pattern = "*/vimwiki/diary/*.md",
+  command = ":silent 0r !~/.vim/bin/generate-vimwiki-diary-template '%'",
 })
 
 api.nvim_create_autocmd("Filetype", {
-    pattern = "vimwiki",
-    command = "silent! iunmap <buffer> <Tab>"
+  pattern = "vimwiki",
+  command = "silent! iunmap <buffer> <Tab>",
 })
 
 api.nvim_create_autocmd("Filetype", {
-    pattern = "vimwiki",
-    command = "silent! iunmap <buffer> <Tab>"
+  pattern = "vimwiki",
+  command = "silent! iunmap <buffer> <Tab>",
 })
 
 -- api.nvim_create_autocmd("VimLeavePre", {
@@ -48,17 +54,17 @@ api.nvim_create_autocmd("Filetype", {
 --     end
 -- })
 
-vim.api.nvim_create_autocmd("DirChangedPre", {
-    callback = function()
-        auto_session.AutoSaveSession()
-
-        -- Clear all buffers and jumps after session save so session doesn't blead over to next session.
-        vim.cmd "clearjumps"
-        vim.cmd "silent! %bwipeout!"
-
-    end,
-    pattern = "global"
-})
+-- vim.api.nvim_create_autocmd("DirChangedPre", {
+--   callback = function()
+--     local auto_session = require "auto-session"
+--     auto_session.AutoSaveSession()
+--
+--     -- Clear all buffers and jumps after session save so session doesn't blead over to next session.
+--     vim.cmd "clearjumps"
+--     vim.cmd "silent! %bwipeout!"
+--   end,
+--   pattern = "global",
+-- })
 
 -- local cursorLineGrp = api.nvim_create_augroup("CursorLine", {clear = true})
 -- api.nvim_create_autocmd({"BufEnter", "VimEnter", "WinEnter", "BufWinEnter"}, {
@@ -73,22 +79,25 @@ vim.api.nvim_create_autocmd("DirChangedPre", {
 --     group = cursorLineGrp
 -- })
 --
-vim.api.nvim_create_autocmd("DirChanged", {
-    callback = function()
-        -- Deferring to avoid otherwise there are tresitter highlighting issues
-        local telescope = require("telescope.actions")
-        vim.defer_fn(function()
-            local is_telescope = false
-            if vim.api.nvim_win_get_config(api.nvim_get_current_win()).zindex then
-                is_telescope = true
-                telescope.close(api.nvim_get_current_buf())
-            end
-            auto_session.AutoRestoreSession()
-            if is_telescope then vim.cmd "Telescope find_files" end
-        end, 100)
-    end,
-    pattern = "global"
-})
+-- vim.api.nvim_create_autocmd("DirChanged", {
+--   callback = function()
+--     -- Deferring to avoid otherwise there are tresitter highlighting issues
+--     local telescope = require "telescope.actions"
+--     local auto_session = require "auto-session"
+--     vim.defer_fn(function()
+--       local is_telescope = false
+--       if vim.api.nvim_win_get_config(api.nvim_get_current_win()).zindex then
+--         is_telescope = true
+--         telescope.close(api.nvim_get_current_buf())
+--       end
+--       auto_session.AutoRestoreSession()
+--       if is_telescope then
+--         vim.cmd "Telescope find_files"
+--       end
+--     end, 100)
+--   end,
+--   pattern = "global",
+-- })
 
 vim.cmd 'let g:firenvim_config = { "globalSettings": { "alt": "all", }, "localSettings": { ".*": { "cmdline": "neovim", "content": "text", "priority": 0, "selector": "textarea", "takeover": "always", }, } }'
 
@@ -101,26 +110,31 @@ vim.cmd 'let fc["https?://jira.media-saturn.com/"] = { "takeover": "never", "pri
 vim.cmd 'let fc["https?://confluence.media-saturn.com/"] = { "takeover": "never", "priority": 1 }'
 vim.cmd 'let fc["https?://reetro.app/"] = { "takeover": "never", "priority": 1 }'
 vim.cmd 'let fc["https?://console.cloud.google.com/"] = { "takeover": "never", "priority": 1 }'
+vim.cmd 'let fc["https?://marketplace.*.mediamarktsaturn.com/admin-ui/grafana"] = { "takeover": "never", "priority": 1 }'
+vim.cmd 'let fc["https?://www.google.com"] = { "takeover": "never", "priority": 1 }'
+vim.cmd 'let fc["https?://chat.openai.com"] = { "takeover": "never", "priority": 1 }'
 
 -- Change `firenvim` file type to enable syntax highlight, `coc` works perfectly
 -- " after this settings!!!
-vim.cmd 'autocmd BufEnter github.com_*.txt set filetype=markdown'
-vim.cmd 'autocmd BufEnter txti.es_*.txt set filetype=typescript'
+vim.cmd "autocmd BufEnter github.com_*.txt set filetype=markdown"
+vim.cmd "autocmd BufEnter txti.es_*.txt set filetype=typescript"
 
 -- Increase the font size to solve the `text too small` issue
 function IsFirenvimActive(event)
-    if vim.g.enable_vim_debug then
-        print("IsFirenvimActive, event: ", vim.inspect(event))
-    end
+  if vim.g.enable_vim_debug then
+    print("IsFirenvimActive, event: ", vim.inspect(event))
+  end
 
-    if vim.fn.exists('*nvim_get_chan_info') == 0 then return 0 end
+  if vim.fn.exists "*nvim_get_chan_info" == 0 then
+    return 0
+  end
 
-    local ui = vim.api.nvim_get_chan_info(event.chan)
-    if vim.g.enable_vim_debug then
-        print("IsFirenvimActive, ui: ", vim.inspect(ui))
-    end
+  local ui = vim.api.nvim_get_chan_info(event.chan)
+  if vim.g.enable_vim_debug then
+    print("IsFirenvimActive, ui: ", vim.inspect(ui))
+  end
 
-    --[[
+  --[[
     If this function is running in browser, the `ui` looks like below:
     {
         client = {
@@ -146,25 +160,35 @@ function IsFirenvimActive(event)
         [true] = 6 -- The channel name
     }
     --]]
-    local is_firenvim_active_in_browser =
-        (ui['client'] ~= nil and ui['client']['name'] ~= nil)
-    if vim.g.enable_vim_debug then
-        print("is_firenvim_active_in_browser: ", is_firenvim_active_in_browser)
-    end
-    return is_firenvim_active_in_browser
+  local is_firenvim_active_in_browser = (ui["client"] ~= nil and ui["client"]["name"] ~= nil)
+  if vim.g.enable_vim_debug then
+    print("is_firenvim_active_in_browser: ", is_firenvim_active_in_browser)
+  end
+  return is_firenvim_active_in_browser
 end
 
 function OnUIEnter(event)
-    if IsFirenvimActive(event) then
-        -- Disable the status bar
-        vim.cmd 'set laststatus=0'
-        vim.cmd 'set guifont=FiraCode\\ Nerd\\ Font\\ Mono'
-    end
+  if IsFirenvimActive(event) then
+    -- Disable the status bar
+    vim.cmd "set laststatus=0"
+    vim.cmd "set guifont=FiraCode\\ Nerd\\ Font\\ Mono"
+  end
 end
 
-local firenvim_font_group =
-    api.nvim_create_augroup("fnvim_font", {clear = true})
+local firenvim_font_group = api.nvim_create_augroup("fnvim_font", { clear = true })
 api.nvim_create_autocmd("UIEnter", {
-    callback = function() OnUIEnter(vim.fn.deepcopy(vim.v.event)) end,
-    pattern = "*"
+  callback = function()
+    OnUIEnter(vim.fn.deepcopy(vim.v.event))
+  end,
+  pattern = "*",
+})
+
+local group = vim.api.nvim_create_augroup("PersistedHooks", {})
+
+vim.api.nvim_create_autocmd({ "User" }, {
+  pattern = "PersistedSavePre",
+  group = group,
+  callback = function()
+    pcall(vim.cmd, "NvimTreeClose")
+  end,
 })

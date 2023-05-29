@@ -1,13 +1,7 @@
+---@type MappingsTable
 local M = {}
---
--- M.lspconfig = {
---     v = {
---         ["<leader>ca"] = {
---             function() vim.lsp.buf.range_code_action() end,
---             "   lsp code_action"
---         }
---     }
--- }
+
+M.general = {}
 
 M.telescope = {
   n = {
@@ -88,5 +82,61 @@ M.lsp_lines = {
 --         }
 --     }
 -- }
+
+M.spectre = {
+  n = {
+    ["<leader>S"] = {
+      function()
+        require("spectre").open()
+      end,
+      "spectre",
+    },
+    ["<leader>sw"] = {
+      function()
+        require("spectre").open_visual {
+          select_word = true,
+        }
+      end,
+      "spectre word",
+    },
+  },
+  v = {
+    ["<leader>sw"] = {
+      function()
+        require("spectre").open_visual()
+      end,
+      "spectre",
+    },
+    ["<leader>sp"] = {
+      function()
+        require("spectre").open_visual {
+          select_word = true,
+        }
+      end,
+      "spectre word",
+    },
+  },
+}
+
+M.comment = {
+  plugin = true,
+
+  -- toggle comment in both modes
+  n = {
+    ["gcc"] = {
+      function()
+        require("Comment.api").toggle.linewise.current()
+      end,
+      "toggle comment",
+    },
+  },
+
+  v = {
+    ["gcc"] = {
+      "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+      "toggle comment",
+    },
+  },
+}
 
 return M
