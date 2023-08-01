@@ -8,10 +8,13 @@ return {
     end,
     dependencies = {
       {
-        "mksony/null-ls.nvim",
+        "jose-elias-alvarez/null-ls.nvim",
         config = function()
           require "custom.configs.null-ls"
         end,
+        dependencies = {
+          "davidmh/cspell.nvim",
+        },
       },
       {
         "Maan2003/lsp_lines.nvim",
@@ -136,8 +139,12 @@ return {
         autoload = true,
         should_autosave = function()
           -- do not autosave if the alpha dashboard is the current filetype
-          return vim.g.started_by_firenvim == nil or vim.g.started_by_firenvim == false
+          if vim.g.started_by_firenvim == nil or vim.g.started_by_firenvim == false then
+            return true
+          end
+          return false
         end,
+        ignored_dirs = { ".git", "node_modules", ".cache", "/private" },
       }
     end,
     lazy = false,
@@ -161,10 +168,13 @@ return {
   },
   {
     "glacambre/firenvim",
+
+    -- Lazy load firenvim
+    -- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
     lazy = false,
-    -- cond = not not vim.g.started_by_firenvim,
+    cond = not not vim.g.started_by_firenvim,
     build = function()
-      require("lazy").load { plugins = { "firenvim" }, wait = true }
+      require("lazy").load { plugins = "firenvim", wait = true }
       vim.fn["firenvim#install"](0)
     end,
   },

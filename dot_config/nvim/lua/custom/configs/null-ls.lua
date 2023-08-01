@@ -1,6 +1,7 @@
 local present, null_ls = pcall(require, "null-ls")
 local null_ls_utils = require "null-ls.utils"
 local null_ls_helpers = require "null-ls.helpers"
+local cspell = require "cspell"
 require("lsp-format").setup {}
 
 if not present then
@@ -25,8 +26,8 @@ local sources = {
     end),
   }, -- Lua
   b.diagnostics.actionlint,
-  b.diagnostics.cspell,
-  b.code_actions.cspell,
+  cspell.diagnostics,
+  cspell.code_actions,
   -- b.diagnostics.editorconfig_checker, -- b.formatting.stylua, -- Shell
   b.formatting.stylua.with {
     cwd = null_ls_helpers.cache.by_bufnr(function(params)

@@ -2,6 +2,7 @@
 export EDITOR='nvim'
 export K9SCONFIG="$HOME/.config/k9s"
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+export LUA_CPATH="$HOME/.local/share/LazyVim/lazy/lua-json5/lua/?.dylib;?.so;?.dylib"
 # autoload -Uz compinit
 # if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
 #   compinit
@@ -74,6 +75,7 @@ KEYTIMEOUT=1
 # User configuration
 
 export PATH="$HOME/.npm-global/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/:/usr/local/bin:vendor/bin:/opt/local/bin:$HOME/.cargo/bin:/usr/local/opt/gettext/bin"
+export SHELL=/usr/local/bin/zsh
 # export MANPATH="/usr/local/man:$MANPATH"
 # antigen bundle docker
 
@@ -261,3 +263,22 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-rust
 
 ### End of Zinit's installer chunk
+
+alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
+alias nvim-kick="NVIM_APPNAME=kickstart nvim"
+alias nvim-chad="NVIM_APPNAME=NvChad nvim"
+alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
+
+function nvims() {
+  items=("default" "kickstart" "LazyVim" "NvChad" "AstroNvim")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
+}
+
+bindkey -s ^a "nvims\n"
