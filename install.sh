@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 
 echo "Checking if brew is installed..."
 # Check if brew is installed, if not install it
