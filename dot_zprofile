@@ -9,3 +9,8 @@ unset file;
 
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
+if command -v brew &>/dev/null; then
+    eval "$(/usr/local/bin/brew shellenv)"
+else
+    echo "Brew is not installed. Skipping eval."
+fi
