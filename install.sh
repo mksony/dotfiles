@@ -9,6 +9,8 @@ else
 	echo "Homebrew is already installed"
 fi
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 brew bundle
 
 chezmoi init git@github.com:mksony/dotfiles.git
